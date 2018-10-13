@@ -29,26 +29,39 @@ clean: ## Cleans up build artifacts
 push: image ## Pushes the image to dockerhub, REQUIRES SPECIAL PERMISSION
 	$(SUDO_CMD) docker push "$(IMAGE):$(TAG)"
 
-deploy-helm: image ## Deploys image with helm
+deploy-sc: ## Deploys service-catalog with helm
+	helm install svc-cat/catalog --name catalog --namespace catalog
+
+remove-sc: ## Removes service-catalog with helm
+	helm delete --purge catalog
+	kubectl delete ns catalog
+
+deploy-broker: image ## Deploys broker with helm
 	helm upgrade --install broker-skeleton --namespace broker-skeleton \
 	charts/servicebroker \
 	--set image="$(IMAGE):$(TAG)",imagePullPolicy="$(PULL)"
 
-purge-sc:
+remove-broker: ## Removes broker with helm
 	helm delete --purge broker-skeleton
-	kubectl delete ClusterServiceBroker broker-skeleton # BUG can't delete it
 	kubectl delete ns broker-skeleton
-	helm delete --purge catalog
-	kubectl delete ns catalog 
 
 create-ns: ## Creates a namespace
 	kubectl create ns test-ns
 
+remove-ns: ## Removes a namespace
+	kubectl delete ns test-ns
+
 provision: create-ns ## Provisions a service instance
 	kubectl apply -f manifests/service-instance.yaml
 
+unprovision: ## Removes a service instance
+	kubectl delete -f manifests/service-instance.yaml
+
 bind: ## Creates a binding
 	kubectl apply -f manifests/service-binding.yaml
+
+unbind: ## Removes a binding
+	kubectl delete -f manifests/service-binding.yaml
 
 help: ## Shows the help
 	@echo 'Usage: make <OPTIONS> ... <TARGETS>'

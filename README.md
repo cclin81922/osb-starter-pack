@@ -1,21 +1,31 @@
-### Deploy broker using Helm
+# Deploy broker using Helm
 
 Deploy with Helm and pass custom image and tag name.
 Note: This also pushes the generated image with docker.
 
 ```console
-$ IMAGE=cclin81922/osbapi-broker TAG=latest PULL=Never make deploy-helm
+$ make deploy-sc
+$ IMAGE=cclin81922/osbapi-broker TAG=latest PULL=Never make deploy-broker
 ```
 
 Keep watch by `svcat get brokers broker-skeleton` until its status becomes ready.
 
-### Cleanup broker using Helm
+# Use broker
 
 ```console
-$ make purge-helm
+$ make provision
+$ make bind
 ```
 
-## Adding your business logic
+Verify
+
+```console
+$ svcat get instances -n test-ns
+$ svcat get bindings -n test-ns
+$ kubectl get secret -n test-ns
+```
+
+# Adding your business logic
 
 To implement your broker, you fill out just a few methods and types in
 `pkg/broker` package:
