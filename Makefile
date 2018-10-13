@@ -41,7 +41,7 @@ purge-sc:
 	helm delete --purge catalog
 	kubectl delete ns catalog 
 
-create-ns: ## Cleans up the namespaces
+create-ns: ## Creates a namespace
 	kubectl create ns test-ns
 
 provision: create-ns ## Provisions a service instance
