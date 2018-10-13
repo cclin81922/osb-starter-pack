@@ -41,10 +41,6 @@ purge-sc:
 	helm delete --purge catalog
 	kubectl delete ns catalog 
 
-deploy-openshift: image ## Deploys image to openshift
-	oc project osb-starter-pack || oc new-project osb-starter-pack
-	openshift/deploy.sh $(IMAGE):$(TAG)
-
 create-ns: ## Cleans up the namespaces
 	kubectl create ns test-ns
 
