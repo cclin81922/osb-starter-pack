@@ -8,7 +8,7 @@ TAG ?= $(shell git describe --tags --always)
 PULL ?= IfNotPresent
 
 build: ## Builds the starter pack
-	go build -i github.com/pmorie/osb-starter-pack/cmd/servicebroker
+	go build -i github.com/cclin81922/osb-starter-pack/cmd/servicebroker
 
 test: ## Runs the tests
 	go test -v $(shell go list ./... | grep -v /vendor/ | grep -v /test/)
