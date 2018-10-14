@@ -7,8 +7,9 @@ import (
 	"github.com/golang/glog"
 	"github.com/pmorie/osb-broker-lib/pkg/broker"
 
-	osb "github.com/pmorie/go-open-service-broker-client/v2"
 	"reflect"
+
+	osb "github.com/pmorie/go-open-service-broker-client/v2"
 )
 
 // NewBusinessLogic is a hook that is called with the Options the program is run
@@ -112,6 +113,12 @@ func (b *BusinessLogic) Provision(request *osb.ProvisionRequest, c *broker.Reque
 		Params:    request.Parameters,
 	}
 
+	// ...
+	exampleInstance.Params["baseurl"] = "TODO"
+	exampleInstance.Params["ca"] = "TODO"
+	exampleInstance.Params["key"] = "TODO"
+	exampleInstance.Params["cert"] = "TODO"
+
 	// Check to see if this is the same instance
 	if i := b.instances[request.InstanceID]; i != nil {
 		if i.Match(exampleInstance) {
@@ -121,7 +128,7 @@ func (b *BusinessLogic) Provision(request *osb.ProvisionRequest, c *broker.Reque
 			// Instance ID in use, this is a conflict.
 			description := "InstanceID in use"
 			return nil, osb.HTTPStatusCodeError{
-				StatusCode: http.StatusConflict,
+				StatusCode:  http.StatusConflict,
 				Description: &description,
 			}
 		}

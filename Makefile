@@ -43,7 +43,6 @@ deploy-broker: image ## Deploys broker with helm
 
 remove-broker: ## Removes broker with helm
 	helm delete --purge broker-skeleton
-	kubectl delete ns broker-skeleton
 
 create-ns: ## Creates a namespace
 	kubectl create ns test-ns
