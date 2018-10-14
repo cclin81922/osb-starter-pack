@@ -192,7 +192,7 @@ iQRlfkYLeXuYwZ5Oqc4HCH7N1076QyiK6n8BN7U1jUwWu/H0EEQvSz19oYyG7Q==
 -----END CERTIFICATE-----
 `
 	)
-	exampleInstance.Params["baseurl"] = "TODO"
+	exampleInstance.Params["baseurl"] = baseurl
 	exampleInstance.Params["ca"] = ca
 	exampleInstance.Params["key"] = key
 	exampleInstance.Params["cert"] = cert
