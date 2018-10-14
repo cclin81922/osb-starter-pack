@@ -115,7 +115,7 @@ func (b *BusinessLogic) Provision(request *osb.ProvisionRequest, c *broker.Reque
 
 	// ...
 	const (
-		baseurl = `https://baas-skeleton.baas-skeleton.svc.cluster.local/`
+		baseurl = `https://baas-skeleton.baas-skeleton.svc.cluster.local`
 		ca      = `-----BEGIN CERTIFICATE-----
 MIID4zCCAsugAwIBAgIJAJNowMdJfs8UMA0GCSqGSIb3DQEBCwUAMIGHMQswCQYD
 VQQGEwJUVzEPMA0GA1UECAwGVGFpd2FuMQ8wDQYDVQQHDAZUYWlwZWkxDjAMBgNV
