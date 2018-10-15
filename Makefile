@@ -30,6 +30,7 @@ push: image ## Pushes the image to dockerhub, REQUIRES SPECIAL PERMISSION
 	$(SUDO_CMD) docker push "$(IMAGE):$(TAG)"
 
 deploy-sc: ## Deploys service-catalog with helm
+    helm repo add svc-cat https://svc-catalog-charts.storage.googleapis.com
 	helm install svc-cat/catalog --name catalog --namespace catalog
 
 remove-sc: ## Removes service-catalog with helm
@@ -71,4 +72,4 @@ help: ## Shows the help
         awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-20s\033[0m %s\n", $$1, $$2}'
 	@echo ''
 
-.PHONY: build test linux image clean push deploy-helm deploy-openshift create-ns provision bind help
+.PHONY: build test linux image clean push deploy-sc remove-sc deploy-broker remove-broker create-ns remove-ns provision unprovision bind unbind help
