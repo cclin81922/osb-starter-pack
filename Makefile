@@ -3,9 +3,9 @@ ifdef USE_SUDO_FOR_DOCKER
 	SUDO_CMD = sudo
 endif
 
-IMAGE ?= quay.io/osb-starter-pack/servicebroker
+IMAGE ?= asia.gcr.io/k8s-project-199813/osbapi-broker
 TAG ?= $(shell git describe --tags --always)
-PULL ?= IfNotPresent
+PULL ?= Never
 
 build: ## Builds the starter pack
 	go build -i github.com/cclin81922/osb-starter-pack/cmd/servicebroker
