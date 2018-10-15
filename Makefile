@@ -30,7 +30,7 @@ push: image ## Pushes the image to dockerhub, REQUIRES SPECIAL PERMISSION
 	$(SUDO_CMD) docker push "$(IMAGE):$(TAG)"
 
 deploy-sc: ## Deploys service-catalog with helm
-    helm repo add svc-cat https://svc-catalog-charts.storage.googleapis.com
+	helm repo add svc-cat https://svc-catalog-charts.storage.googleapis.com
 	helm install svc-cat/catalog --name catalog --namespace catalog
 
 remove-sc: ## Removes service-catalog with helm
